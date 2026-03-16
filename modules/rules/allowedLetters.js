@@ -24,5 +24,8 @@ export const allowedLetters = [
     'w',
     'x',
     'y',
-    'z'
+    'z',
+    'æ',
+    'ø',
+    'å'
 ]
