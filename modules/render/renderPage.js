@@ -1,5 +1,6 @@
 import { rows } from "./rows.js";
 import { wordBox } from "./wordBox.js";
+import { displayKeyboard } from "../displayKeyboard.js";
 
 
 const gameBoard = document.getElementById('game-board')
@@ -28,4 +29,5 @@ export const renderPage = (
         attemptsContainerEl.append(rowEl)
     }
     gameBoard.append(attemptsContainerEl)
+    displayKeyboard()
 }
