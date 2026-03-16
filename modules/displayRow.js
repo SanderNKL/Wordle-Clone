@@ -1,17 +1,23 @@
+import { currentWord } from "./rules/currentWord.js";
 
 
-export const displayRow = (todaysWord, row) => {
+export const displayRow = (row) => {
+    // ENSURE WE LABEL THE AMOUNT OF YELLOWS CORRECTLY
+    let availableLetters = [...currentWord];
+
+    // LABEL EACH LETTER
     for (let i = 0; i < 5; i++) {
+        availableLetters.splice(1, 1);
+
         let box = row[i];
-        if (todaysWord[i] == box.textContent) {
+        let letter = box.textContent;
+
+        if (currentWord[i] == letter) {
             box.classList.add('correct')
-        } else if (todaysWord.includes(box.textContent)) {
+        } else if (availableLetters.includes(letter)) {
             box.classList.add('included')
         } else (
             box.classList.add('incorrect')
         )
     }
-    row.forEach(box => {
-        
-    })
 }
