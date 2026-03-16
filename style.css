@@ -15,6 +15,23 @@ body {
     padding: 20px;
     margin: 5px;
     border: 3px solid rgb(49, 49, 49);
+    transform-style: preserve-3d;
+}
+
+@keyframes flip {
+    0% {
+        transform: rotateX(0);
+    }
+    50% {
+        transform: rotateX(90deg);
+    }
+    100% {
+        transform: rotateX(0);
+    }
+}
+
+.reveal {
+    animation: flip 1s ease forwards;
 }
 
 .correct {
