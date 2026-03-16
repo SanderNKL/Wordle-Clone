@@ -2,8 +2,13 @@ import { rows } from "./rows.js";
 import { wordBox } from "./wordBox.js";
 
 
+const gameBoard = document.getElementById('game-board')
+
 export const renderPage = (
 ) => {
+    // RESET THE BOARD
+    gameBoard.replaceChildren();
+
     const attemptsContainerEl = document.createElement('div');
     attemptsContainerEl.classList.add('attempts-container')
     
@@ -22,5 +27,5 @@ export const renderPage = (
         rows.push(row)
         attemptsContainerEl.append(rowEl)
     }
-    document.body.append(attemptsContainerEl)
+    gameBoard.append(attemptsContainerEl)
 }
