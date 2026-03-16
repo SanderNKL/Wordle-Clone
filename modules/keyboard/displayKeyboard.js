@@ -1,3 +1,6 @@
+import { clickEvent } from "./clickEvent.js";
+
+
 const keyboardElement = document.getElementById('game-keyboard');
 
 export const displayKeyboard = (submissions = []) => {
@@ -23,6 +26,10 @@ export const displayKeyboard = (submissions = []) => {
             const keyEl = document.createElement('div');
             keyEl.classList.add('keyboard-key')
             keyEl.textContent = key.toUpperCase();
+
+            // MAKE BUTTON CLICKABLE
+            clickEvent(keyEl)
+
             rowEl.append(keyEl)
         })
         keyboardElement.append(rowEl)
