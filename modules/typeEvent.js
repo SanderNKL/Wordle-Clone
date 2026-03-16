@@ -3,29 +3,34 @@ import { submissions } from "./submissions.js"
 import { allowedLetters } from "./rules/allowedLetters.js"
 import { validWords } from "./rules/validWords.js"
 import { displayRow } from "./displayRow.js"
+import { currentWord } from "./rules/currentWord.js"
 
 
 let currSentence = []
 
-export const typeEvent = (
-    todaysWord
-) => document.addEventListener('keydown', (e) => {
+const enterWord = (word) => {
+    if (word.length < 5) {
+        return alert('NOT ENOUGH LETTERS!')
+    }
+    else if (!validWords.includes(word)) {
+        return alert('NOT A WORD!')
+    }
+
+    displayRow(rows[submissions.length])
+    submissions.push(currSentence)
+    currSentence = []
+
+    if (word == currentWord) {
+        return alert('You win!')
+    }
+    else if (submissions.length == 6) {
+        return alert(`YOU LOSE! The word was ${currentWord}`)
+    }
+}
+
+export const typeEvent = () => document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-        const currWord = currSentence.join("")
-        if (currWord.length < 5) {
-            return alert('NOT ENOUGH LETTERS!')
-        }
-        else if (!validWords.includes(currWord)) {
-            return alert('NOT A WORD!')
-        }
-
-        displayRow(todaysWord, rows[submissions.length])
-        submissions.push(currSentence)
-        currSentence = []
-
-        if (currWord == todaysWord) {
-            return alert('You win!')
-        }
+        enterWord(currSentence.join(""))
     }
 
     else if (e.key === 'Backspace') {
