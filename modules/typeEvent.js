@@ -29,19 +29,21 @@ const enterWord = (word) => {
 }
 
 export const typeEvent = () => document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
+    let letter = e.key.toLowerCase();
+
+    if (letter === 'enter') {
         enterWord(currSentence.join(""))
     }
 
-    else if (e.key === 'Backspace') {
+    else if (letter === 'backspace') {
         currSentence.splice(currSentence.length-1, 1)
         const rowsEl = rows[submissions.length][currSentence.length];
         rowsEl.textContent = ""
     }
 
-    else if (currSentence.length < 5 && allowedLetters.includes(e.key)) {
-        currSentence.push(e.key)
+    else if (currSentence.length < 5 && allowedLetters.includes(letter)) {
+        currSentence.push(letter)
         const rowsEl = rows[submissions.length][currSentence.length-1];
-        rowsEl.textContent = e.key
+        rowsEl.textContent = letter.toUpperCase()
     }
 })
