@@ -1,24 +1,18 @@
-import { currentWord } from "./rules/currentWord.js";
+import { Correct, Misplaced, Invalid } from "./submissions.js";
 
 
-export const displayRow = (row) => {
-    // ENSURE WE LABEL THE AMOUNT OF YELLOWS CORRECTLY
-    let availableLetters = [...currentWord];
-
-    // LABEL EACH LETTER
-    for (let i = 0; i < 5; i++) {
+export const displayRow = (row, submission) => {
+    for (let i = 0; i < submission.placements.length; i++) {
         setTimeout(() => {
-            availableLetters.splice(0, 1);
-
             let box = row[i];
-            let letter = box.textContent.toLowerCase();
+            let placement = submission.placements[i]
 
             // ANIMATE THE BOX
             box.classList.add("reveal");
-
-            if (currentWord[i] == letter) {
+            console.log('placement', placement, 'is correct:', placement instanceof Correct)
+            if (placement instanceof Correct) {
                 box.classList.add('correct')
-            } else if (availableLetters.includes(letter)) {
+            } else if (placement instanceof Misplaced) {
                 box.classList.add('included')
             } else (
                 box.classList.add('incorrect')

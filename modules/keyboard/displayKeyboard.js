@@ -1,17 +1,35 @@
 import { clickEvent } from "./clickEvent.js";
-
+import { submissions } from "../submissions.js";
 
 const keyboardElement = document.getElementById('game-keyboard');
 
-export const displayKeyboard = (submissions = []) => {
+export const displayKeyboard = () => {
     keyboardElement.replaceChildren('')
-    let usedLetters = [...submissions];
-    submissions.forEach(word => word.forEach(letter => {
-            if(!usedLetters.includes(letter)) {
-                usedLetters.push(letter)
+    
+    const letterStates = {};
+
+    submissions.forEach(word => {
+        word.forEach(({ letter, state }) => {
+
+            if (!letterStates[letter]) {
+                letterStates[letter] = state;
             }
-        })
-    )
+
+            // Priority: correct > included > incorrect
+            if (state === "correct") {
+                letterStates[letter] = "correct";
+            } else if (state === "included" && letterStates[letter] !== "correct") {
+                letterStates[letter] = "included";
+            } else if (
+                state === "incorrect" &&
+                letterStates[letter] !== "correct" &&
+                letterStates[letter] !== "included"
+            ) {
+                letterStates[letter] = "incorrect";
+            }
+        });
+    });
+
 
     let keyboardRows = [
         ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'å', 'backspace'],
@@ -26,6 +44,15 @@ export const displayKeyboard = (submissions = []) => {
             const keyEl = document.createElement('div');
             keyEl.classList.add('keyboard-key')
             keyEl.textContent = key.toUpperCase();
+            
+            const state = letterStates[key];
+            if (state === "correct") {
+                keyEl.classList.add("correct");
+            } else if (state === "included") {
+                keyEl.classList.add("included");
+            } else if (state === "incorrect") {
+                keyEl.classList.add("incorrect");
+            }
 
             // MAKE BUTTON CLICKABLE
             clickEvent(keyEl)

@@ -4,7 +4,9 @@ import { rows } from "./render/rows.js";
 import { submissions } from "./submissions.js";
 import { validWords } from "./rules/validWords.js";
 import { displayRow } from "../modules/displayRow.js"
+import { displayKeyboard } from "./keyboard/displayKeyboard.js";
 import { currentWord } from "./rules/currentWord.js";
+import { Submission } from "./submissions.js";
 
 
 export let userInput = [];
@@ -18,10 +20,15 @@ const enterWord = (word) => {
         return alert('NOT A WORD!')
     }
 
-    displayRow(rows[submissions.length])
-    submissions.push(userInput)
-    userInput = []
+    // CREATE A SUBMISSION
+    let submission = new Submission([...word])
+    displayRow(rows[submissions.length], submission)
+    submissions.push(submission)
 
+    userInput = []
+    // displayKeyboard()
+    
+    console.log('now at:', submissions.length, 'words')
     if (word == currentWord) {
         return alert('You win!')
     }
