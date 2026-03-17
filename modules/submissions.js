@@ -12,8 +12,8 @@ export class Submission {
     }
 
     validate(userInputArr) {
-        let curruserInputArr = [...currentWord];
-        let availableLetters = [...curruserInputArr];
+        let currUserInputArr = [...currentWord];
+        let availableLetters = [...currUserInputArr];
         let output = []
         
         /*
@@ -36,12 +36,14 @@ export class Submission {
 
 
         // FINN GRØNNE
+        console.log(availableLetters)
         for (let i = 0; i < userInputArr.length; i++) {
             let letter = userInputArr[i];
 
-            if (letter == curruserInputArr[i]) {
+            if (letter == currUserInputArr[i]) {
                 output.push(new Correct)
-                availableLetters.splice(i, 1)
+                let index = availableLetters.indexOf(letter)
+                availableLetters.splice(index, 1)
             } else {
                 output.push(new Invalid)
             }
@@ -55,7 +57,8 @@ export class Submission {
                 && availableLetters.includes(letter)
             ) {
                 output[i] = new Misplaced
-                availableLetters.splice(i, 1)
+                let index = availableLetters.indexOf(letter)
+                availableLetters.splice(index, 1)
             }
         }
 
