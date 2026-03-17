@@ -26,7 +26,7 @@ const enterWord = (word) => {
     submissions.push(submission)
 
     userInput = []
-    // displayKeyboard()
+    displayKeyboard()
     
     if (word == currentWord) {
         return alert('You win!')

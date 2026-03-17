@@ -8,6 +8,10 @@ export class Misplaced {}
 
 export class Submission {
     constructor (userInputArr) {
+        this.letters = userInputArr
+        this.correctLetters = [];
+        this.misplacedLetters = [];
+        this.incorrectLetters = [];
         this.placements = this.validate(userInputArr);
     }
 
@@ -41,9 +45,11 @@ export class Submission {
 
             if (letter == currUserInputArr[i]) {
                 output.push(new Correct)
+                this.correctLetters.push(letter)
                 let index = availableLetters.indexOf(letter)
                 availableLetters.splice(index, 1)
             } else {
+                this.incorrectLetters.push(letter)
                 output.push(new Invalid)
             }
         }
@@ -57,6 +63,7 @@ export class Submission {
             ) {
                 output[i] = new Misplaced
                 let index = availableLetters.indexOf(letter)
+                this.misplacedLetters.push(letter)
                 availableLetters.splice(index, 1)
             }
         }
