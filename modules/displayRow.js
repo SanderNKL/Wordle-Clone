@@ -12,7 +12,7 @@ export const displayRow = (row, submission) => {
             if (placement instanceof Correct) {
                 box.classList.add('correct')
             } else if (placement instanceof Misplaced) {
-                box.classList.add('included')
+                box.classList.add('misplaced')
             } else (
                 box.classList.add('incorrect')
             )
