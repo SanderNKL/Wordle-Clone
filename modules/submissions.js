@@ -36,7 +36,6 @@ export class Submission {
 
 
         // FINN GRØNNE
-        console.log(availableLetters)
         for (let i = 0; i < userInputArr.length; i++) {
             let letter = userInputArr[i];
 

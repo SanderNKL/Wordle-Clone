@@ -43,7 +43,6 @@ body {
 
 .keyboard-row {
     display: flex;
-
 }
 
 @keyframes flip {
