@@ -9,7 +9,6 @@ export const displayRow = (row, submission) => {
 
             // ANIMATE THE BOX
             box.classList.add("reveal");
-            console.log('placement', placement, 'is correct:', placement instanceof Correct)
             if (placement instanceof Correct) {
                 box.classList.add('correct')
             } else if (placement instanceof Misplaced) {

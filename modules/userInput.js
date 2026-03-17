@@ -28,7 +28,6 @@ const enterWord = (word) => {
     userInput = []
     // displayKeyboard()
     
-    console.log('now at:', submissions.length, 'words')
     if (word == currentWord) {
         return alert('You win!')
     }

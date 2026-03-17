@@ -7,13 +7,13 @@ export class Misplaced {}
 
 
 export class Submission {
-    constructor (wordArr) {
-        this.placements = this.validate(wordArr);
+    constructor (userInputArr) {
+        this.placements = this.validate(userInputArr);
     }
 
-    validate(wordArr) {
-        let currWordArr = [...currentWord];
-        let availableLetters = [...currWordArr];
+    validate(userInputArr) {
+        let curruserInputArr = [...currentWord];
+        let availableLetters = [...curruserInputArr];
         let output = []
         
         /*
@@ -23,17 +23,42 @@ export class Submission {
         Misplaced if wrongly placed
         Invalid if not included.
         */
-        for (let i = 0; i < wordArr.length; i++) {
-            let letter = wordArr[i];
-            if (letter == currWordArr[i]) {
+
+        /*
+        MÅ GJØRE:
+        - VALIDERE GRØNNE, GULE, GRÅ
+        - IKKE GI GUL DERSOM DEN IKKE FINNES / EKSTRA
+
+        SJEKK OM BOKSTAV ER PÅ RETT PLASS
+            RIKTIG -> GRØNN VISST DEN ER. FJERN BOKSTAV
+            FEIL PLASSERT -> GUL VISST 
+        */
+
+
+        // FINN GRØNNE
+        for (let i = 0; i < userInputArr.length; i++) {
+            let letter = userInputArr[i];
+
+            if (letter == curruserInputArr[i]) {
                 output.push(new Correct)
-            } else if (availableLetters.includes(letter)) { 
-                output.push(new Misplaced)
+                availableLetters.splice(i, 1)
             } else {
                 output.push(new Invalid)
             }
-            availableLetters.splice(0, 1)
         }
+
+        // FINN GULE
+        for (let i = 0; i < userInputArr.length; i++) {
+            let letter = userInputArr[i];
+            if (
+                !(output[i] instanceof Correct)
+                && availableLetters.includes(letter)
+            ) {
+                output[i] = new Misplaced
+                availableLetters.splice(i, 1)
+            }
+        }
+
         return output
     }
 }
